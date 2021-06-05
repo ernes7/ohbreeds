@@ -7,17 +7,16 @@ export default function DogPage() {
   let { slug } = useParams();
   const [breedImages, setBreedImages] = React.useState([]);
 
-  React.useEffect(() => {
-    getImages();
-  }, []);
-
-
   // Slug comes in the form "breed subBreed", needs to be breed/subBreed for request
-  const getImages = () => {
+  const getImages = React.useCallback(() => {
     fetch(`https://dog.ceo/api/breed/${slug.replace(' ', '/')}/images/random/4`)
       .then((response) => response.json())
       .then((response) => setBreedImages(response.message));
-  };
+  }, [slug]);
+
+  React.useEffect(() => {
+    getImages();
+  }, [getImages]);
 
   return (
     <div className='breedContainer'>
