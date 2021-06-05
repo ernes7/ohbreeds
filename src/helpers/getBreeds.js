@@ -19,4 +19,4 @@ const getBreeds = () =>
       }, [])
     )
 
-module.exports = getBreeds
+export default getBreeds;
